@@ -1,11 +1,13 @@
 import calendar
 import webbrowser
 from datetime import datetime
-from typing import TypedDict
 from urllib.parse import urlparse, urlunparse
 
 import pyperclip
 from fastmcp import FastMCP
+from mcp.types import ToolAnnotations
+
+from .models import DateInfo
 
 mcp = FastMCP(
     name="MCP System Bridge",
@@ -13,35 +15,7 @@ mcp = FastMCP(
 )
 
 
-class DateInfo(TypedDict):
-    """Type definition for date information returned by get_current_date_info."""
-
-    full_datetime: str
-    iso_date: str
-    iso_datetime: str
-    timestamp: int
-    year: int
-    month: int
-    day: int
-    day_of_year: int
-    day_of_week_number: int
-    day_name: str
-    day_name_short: str
-    month_name: str
-    month_name_short: str
-    is_leap_year: bool
-    week_number: int
-    iso_year: int
-    weekday_iso: int
-    quarter: int
-    days_in_month: int
-    hour: int
-    minute: int
-    second: int
-    microsecond: int
-
-
-@mcp.tool()
+@mcp.tool(annotations=ToolAnnotations(readOnlyHint=True))
 def open_urls(urls: list[str]) -> dict[str, str]:
     """
     Open a list of URLs in the default browser.
@@ -63,7 +37,7 @@ def open_urls(urls: list[str]) -> dict[str, str]:
     return results
 
 
-@mcp.tool()
+@mcp.tool(annotations=ToolAnnotations(readOnlyHint=True))
 def copy_to_clipboard(text: str) -> str:
     """
     Copy text to the clipboard.
@@ -75,7 +49,7 @@ def copy_to_clipboard(text: str) -> str:
         return f"Error copying text to clipboard: {e}"
 
 
-@mcp.tool()
+@mcp.tool(annotations=ToolAnnotations(readOnlyHint=True))
 def get_current_date_info() -> DateInfo:
     """
     Get comprehensive information about the current date.
@@ -150,31 +124,31 @@ def get_current_date_info() -> DateInfo:
     # Timestamp
     timestamp = int(now.timestamp())
 
-    return {
-        "full_datetime": full_datetime,
-        "iso_date": iso_date,
-        "iso_datetime": iso_datetime,
-        "timestamp": timestamp,
-        "year": year,
-        "month": month,
-        "day": day,
-        "day_of_year": day_of_year,
-        "day_of_week_number": day_of_week_number,
-        "day_name": day_name_english,
-        "day_name_short": day_name_short_english,
-        "month_name": month_name_english,
-        "month_name_short": month_name_short_english,
-        "is_leap_year": is_leap_year,
-        "week_number": week_number,
-        "iso_year": year_iso,
-        "weekday_iso": weekday_iso,
-        "quarter": quarter,
-        "days_in_month": days_in_month,
-        "hour": now.hour,
-        "minute": now.minute,
-        "second": now.second,
-        "microsecond": now.microsecond,
-    }
+    return DateInfo(
+        full_datetime=full_datetime,
+        iso_date=iso_date,
+        iso_datetime=iso_datetime,
+        timestamp=timestamp,
+        year=year,
+        month=month,
+        day=day,
+        day_of_year=day_of_year,
+        day_of_week_number=day_of_week_number,
+        day_name=day_name_english,
+        day_name_short=day_name_short_english,
+        month_name=month_name_english,
+        month_name_short=month_name_short_english,
+        is_leap_year=is_leap_year,
+        week_number=week_number,
+        iso_year=year_iso,
+        weekday_iso=weekday_iso,
+        quarter=quarter,
+        days_in_month=days_in_month,
+        hour=now.hour,
+        minute=now.minute,
+        second=now.second,
+        microsecond=now.microsecond,
+    )
 
 
 def main() -> None:

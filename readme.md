@@ -29,6 +29,10 @@ To install the `uvx` refer to the [uv documentation](https://docs.astral.sh/uv/g
 
 ## Changelog
 
+### 0.1.4
+
+- Defined annotations to declare tools as read-only.
+
 ### 0.1.3
 
 - Added `get_current_date_info` tool to get comprehensive information about the current date.
