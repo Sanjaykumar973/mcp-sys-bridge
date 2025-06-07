@@ -25,8 +25,13 @@ To install the `uvx` refer to the [uv documentation](https://docs.astral.sh/uv/g
 
 - `open_urls`: Open a list of URLs in the default browser.
 - `copy_to_clipboard`: Copy text to the clipboard.
+- `get_current_date_info`: Get comprehensive information about the current date including day, month, year, day of year, day name, leap year status, week number, and more.
 
 ## Changelog
+
+### 0.1.3
+
+- Added `get_current_date_info` tool to get comprehensive information about the current date.
 
 ### 0.1.2
 
