@@ -1,4 +1,5 @@
 import webbrowser
+from urllib.parse import urlparse, urlunparse
 
 import pyperclip
 from fastmcp import FastMCP
@@ -14,8 +15,14 @@ async def open_url(url: str) -> str:
     """
     Open a URL in the default browser.
     """
+    parsed_url = urlparse(url)
+    if not parsed_url.scheme:
+        parsed_url = urlparse(f"https://{url}")
+    if not parsed_url.netloc:
+        return "Error: Invalid URL. Please provide a valid URL."
+    processed_url = urlunparse(parsed_url)
     try:
-        webbrowser.open(url)
+        webbrowser.open(processed_url)
         return "URL opened successfully."
     except Exception as e:
         return f"Error opening URL: {e}"
