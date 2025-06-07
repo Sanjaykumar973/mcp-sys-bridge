@@ -73,11 +73,9 @@ jobs:
           if [ -n "$PREVIOUS_TAG" ]; then
             # Generate changelog from the last tag
             COMMITS=$(git log --pretty=format:"- %s (%h)" $PREVIOUS_TAG..HEAD)
-            COMPARE_URL="https://github.com/${{ github.repository }}/compare/$PREVIOUS_TAG...v$VERSION"
           else
             # If there are no previous tags, use the latest commits
             COMMITS=$(git log --pretty=format:"- %s (%h)" -10)
-            COMPARE_URL="https://github.com/${{ github.repository }}/commits/v$VERSION"
           fi
 
           # Create the release notes
@@ -85,8 +83,6 @@ jobs:
           ## What's Changed
 
           $COMMITS
-
-          **Full Changelog**: $COMPARE_URL
 
           EOF
 
@@ -105,7 +101,7 @@ jobs:
 
       - name: Create Release
         if: steps.tag-check.outputs.exists == 'false'
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: v${{ steps.package-version.outputs.version }}
           name: Release v${{ steps.package-version.outputs.version }}
