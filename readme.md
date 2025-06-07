@@ -23,10 +23,14 @@ To install the `uvx` refer to the [uv documentation](https://docs.astral.sh/uv/g
 
 ## Available Tools
 
-- `open_url`: Open a URL in the default browser.
+- `open_urls`: Open a list of URLs in the default browser.
 - `copy_to_clipboard`: Copy text to the clipboard.
 
 ## Changelog
+
+### 0.1.2
+
+- Change `open_url` to `open_urls` to open a list of URLs in the default browser.
 
 ### 0.1.1
 

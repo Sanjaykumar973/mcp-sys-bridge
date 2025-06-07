@@ -1,6 +1,6 @@
 [project]
 name = "mcp-sys-bridge"
-version = "0.1.1"
+version = "0.1.2"
 description = "An implementation of the Model Context Protocol (MCP), acting as a simple bridge to native OS functionalities like clipboard management and URL handling."
 authors = [
     { name = "Leynier Gutiérrez González", email = "leynier41@gmail.com" },

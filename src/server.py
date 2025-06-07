@@ -11,25 +11,29 @@ mcp = FastMCP(
 
 
 @mcp.tool()
-async def open_url(url: str) -> str:
+def open_urls(urls: list[str]) -> dict[str, str]:
     """
-    Open a URL in the default browser.
+    Open a list of URLs in the default browser.
     """
-    parsed_url = urlparse(url)
-    if not parsed_url.scheme:
-        parsed_url = urlparse(f"https://{url}")
-    if not parsed_url.netloc:
-        return "Error: Invalid URL. Please provide a valid URL."
-    processed_url = urlunparse(parsed_url)
-    try:
-        webbrowser.open(processed_url)
-        return "URL opened successfully."
-    except Exception as e:
-        return f"Error opening URL: {e}"
+    results = {}
+    for url in urls:
+        parsed_url = urlparse(url)
+        if not parsed_url.scheme:
+            parsed_url = urlparse(f"https://{url}")
+        if not parsed_url.netloc:
+            results[url] = "Error: Invalid URL. Please provide a valid URL."
+            continue
+        processed_url = urlunparse(parsed_url)
+        try:
+            webbrowser.open(processed_url)
+            results[url] = "URL opened successfully."
+        except Exception as e:
+            results[url] = f"Error opening URL: {e}"
+    return results
 
 
 @mcp.tool()
-async def copy_to_clipboard(text: str) -> str:
+def copy_to_clipboard(text: str) -> str:
     """
     Copy text to the clipboard.
     """
