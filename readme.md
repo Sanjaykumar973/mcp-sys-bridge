@@ -36,3 +36,5 @@ To install the `uvx` refer to the [uv documentation](https://docs.astral.sh/uv/g
 
 - Added `open_url` tool.
 - Added `copy_to_clipboard` tool.
+
+> If you find this project useful, please consider starring the repository. Contributions are welcome!
